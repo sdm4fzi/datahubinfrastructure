@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aasx-server-blazor  
+  labels:
+    app: aasx-server-blazor
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 5001
+    name: webinterface 
+    protocol: TCP
+  - port: 51310
+    name: apiserver 
+    protocol: TCP
+  selector:
+    app: aasx-server-blazor

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aasx-server-blazor 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aasx-server-blazor
+  template:
+    metadata:
+      labels:
+        app: aasx-server-blazor
+    spec:
+      containers:
+        - name: aasx-server-blazor 
+          image: adminshellio/aasx-server-blazor-for-demo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 51310
+            - containerPort: 5001

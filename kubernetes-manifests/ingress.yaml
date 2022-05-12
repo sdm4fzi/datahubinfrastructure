@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aas 
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  tls:
+  - hosts:
+    - aas.ingress.sdm4fzi-aas.sdm4fzi.okeanos.dev
+    secretName: aasx-server-blazor-tls
+  ingressClassName: nginx
+  rules:
+  - host: aas.ingress.sdm4fzi-aas.sdm4fzi.okeanos.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: aasx-server-blazor 
+            port:
+              name: webinterface
+      - path: /api
+        pathType: Prefix
+        backend:
+          service: 
+            name: aasx-server-blazor 
+            port:
+              name: apiserver
